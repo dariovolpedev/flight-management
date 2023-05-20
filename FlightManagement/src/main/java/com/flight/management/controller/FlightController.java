@@ -1,5 +1,7 @@
 package com.flight.management.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flight.management.dto.FlightDto;
+import com.flight.management.dto.FlightInputDto;
 import com.flight.management.entity.Flight;
 import com.flight.management.service.FlightService;
 
@@ -27,9 +29,9 @@ public class FlightController {
 	private FlightService service;
 
 	@PostMapping()
-	public ResponseEntity<Flight> createFlight(@RequestBody FlightDto dto) {
+	public ResponseEntity<Flight> createFlight(@RequestBody FlightInputDto dto) {
 		LOGGER.info("Creating a new flight...");
-		Flight flight = service.save(dto);
+		Flight flight = service.createFlight(dto);
 		LOGGER.info("Flight created with id: " + flight.getId());
 		return new ResponseEntity<Flight>(flight, HttpStatus.OK);
 	}
@@ -40,6 +42,14 @@ public class FlightController {
 		Flight flight = service.getById(flightId);
 		LOGGER.info("Flight found");
 		return new ResponseEntity<Flight>(flight, HttpStatus.OK);
+	}
+
+	@GetMapping()
+	public ResponseEntity<List<Flight>> getAllCustomer() {
+		LOGGER.info("Getting all flights");
+		List<Flight> flights = service.getAll();
+		LOGGER.info("Flights found: " + flights.size());
+		return new ResponseEntity<List<Flight>>(flights, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{flightId}")

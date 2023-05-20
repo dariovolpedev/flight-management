@@ -1,8 +1,8 @@
 package com.flight.management.entity.base;
 
 import java.util.List;
-import java.util.Queue;
 
+import com.flight.management.dto.WaitingCustomer;
 import com.flight.management.entity.Customer;
 
 import lombok.Data;
@@ -19,7 +19,7 @@ public abstract class AbstractFlight extends AbstractBaseEntity {
 
 	private List<Customer> passengers;
 
-	private Queue<Customer> waitingPassengers;
+	private List<WaitingCustomer> waitingPassengers;
 
 	private int maxNumber;
 

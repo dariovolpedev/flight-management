@@ -13,6 +13,7 @@ public class FlightMapperImpl implements FlightMapper {
 		flight.setPassengers(dto.getPassengers());
 		flight.setWaitingPassengers(dto.getWaitingPassengers());
 		flight.setDateCreated(new Date());
+		flight.setId(dto.getId());
 		return flight;
 	}
 
@@ -22,6 +23,7 @@ public class FlightMapperImpl implements FlightMapper {
 		dto.setMaxNumber(entity.getMaxNumber());
 		dto.setPassengers(entity.getPassengers());
 		dto.setWaitingPassengers(entity.getWaitingPassengers());
+		dto.setId(entity.getId());
 		return dto;
 	}
 
