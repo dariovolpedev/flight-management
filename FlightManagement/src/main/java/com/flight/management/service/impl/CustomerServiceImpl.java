@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.flight.management.dto.CustomerDto;
 import com.flight.management.entity.Customer;
 import com.flight.management.mapper.CustomerMapper;
+import com.flight.management.mapper.CustomerMapperImpl;
 import com.flight.management.repository.CustomerRepository;
 import com.flight.management.service.CustomerService;
 
@@ -17,8 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepository repository;
 
-	@Autowired
-	private CustomerMapper mapper;
+	private CustomerMapper mapper = new CustomerMapperImpl();
 
 	@Override
 	public List<Customer> getAll() {
@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer update(CustomerDto dto) {
-		return repository.update(mapper.fromDto(dto));
+		return repository.save(mapper.fromDto(dto));
 	}
 
 	@Override

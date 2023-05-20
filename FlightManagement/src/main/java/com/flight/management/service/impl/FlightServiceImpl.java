@@ -12,6 +12,7 @@ import com.flight.management.entity.Flight;
 import com.flight.management.exception.ElementNotFoundException;
 import com.flight.management.exception.MaxNumberExcedeedException;
 import com.flight.management.mapper.FlightMapper;
+import com.flight.management.mapper.FlightMapperImpl;
 import com.flight.management.repository.FlightRepository;
 import com.flight.management.service.FlightService;
 
@@ -21,8 +22,7 @@ public class FlightServiceImpl implements FlightService {
 	@Autowired
 	private FlightRepository repository;
 
-	@Autowired
-	private FlightMapper mapper;
+	private FlightMapper mapper = new FlightMapperImpl();
 
 	@Override
 	public List<Flight> getAll() {
@@ -43,7 +43,7 @@ public class FlightServiceImpl implements FlightService {
 		if (dto.getPassengers().size() > dto.getMaxNumber()) {
 			throw new MaxNumberExcedeedException("Max number excedeed");
 		} else {
-			return repository.update(mapper.fromDto(dto));
+			return repository.save(mapper.fromDto(dto));
 		}
 	}
 

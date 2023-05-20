@@ -1,11 +1,11 @@
 package com.flight.management.repository;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.flight.management.entity.Flight;
-import com.flight.management.utils.mongo.BaseRepository;
 
 @Repository
-public interface FlightRepository extends BaseRepository<Flight, String>{
+public interface FlightRepository extends MongoRepository<Flight, String>{
 
 }
