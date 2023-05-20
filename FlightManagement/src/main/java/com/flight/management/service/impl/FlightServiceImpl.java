@@ -112,6 +112,8 @@ public class FlightServiceImpl implements FlightService {
 						.filter(wait -> wait.getCustomerId().equals(customerId)).collect(Collectors.toList()).get(0);
 				flight.getWaitingPassengers().remove(cust);
 				customerService.delete(customerId);
+			} else {
+				throw new NullPointerException("Customer doesn't exist");
 			}
 		} else {
 			throw new ElementNotFoundException("Flight with id: " + flightId + " wasn't find");
